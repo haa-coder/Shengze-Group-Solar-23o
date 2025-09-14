@@ -3,7 +3,10 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
 import fs from "fs";
-import archiver from "archiver";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
@@ -12,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 // Serve attached_assets directory statically with proper options for binary files
 // Use consistent path for all environments (serverless-safe)
 const getAttachedAssetsPath = () => {
-  return path.join(process.cwd(), 'attached_assets');
+  return path.join(__dirname, '..', 'attached_assets');
 };
 
 const attachedAssetsPath = getAttachedAssetsPath();
@@ -65,23 +68,17 @@ app.get('/download/:filename', (req, res) => {
     return res.status(404).json({ message: 'File not found' });
   }
   
-  // Set appropriate headers and send file
-  if (fileExtension === '.pdf') {
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-    res.sendFile(filePath, (err) => {
+  // Use res.download for robust file serving in serverless environments
+  try {
+    res.download(filePath, filename, (err) => {
       if (err && !res.headersSent) {
+        console.error('Download error:', err);
         res.status(500).json({ message: 'Error downloading file' });
       }
     });
-  } else if (fileExtension === '.docx') {
-    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-    res.sendFile(filePath, (err) => {
-      if (err && !res.headersSent) {
-        res.status(500).json({ message: 'Error downloading file' });
-      }
-    });
+  } catch (error) {
+    console.error('Download setup error:', error);
+    res.status(500).json({ message: 'Error setting up download' });
   }
 });
 
@@ -100,7 +97,15 @@ app.get('/download-all-specs', async (req, res) => {
     const zipName = 'Technical_Specifications_Complete.zip';
     res.setHeader('Content-Type', 'application/zip');
     res.setHeader('Content-Disposition', `attachment; filename="${zipName}"`);
+    
+    // Flush headers to ensure they're sent before streaming
+    if (res.flushHeaders) {
+      res.flushHeaders();
+    }
 
+    // Dynamically import archiver to avoid cold start issues
+    const { default: archiver } = await import('archiver');
+    
     // Create ZIP archive
     const archive = archiver('zip', {
       zlib: { level: 9 } // Maximum compression
@@ -116,7 +121,9 @@ app.get('/download-all-specs', async (req, res) => {
 
     // Handle client disconnect
     res.on('close', () => {
-      archive.abort();
+      if (archive) {
+        archive.abort();
+      }
     });
 
     // Pipe archive data to response
