@@ -1,0 +1,59 @@
+Microsoft Windows [Version 10.0.19045.6332]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>rmdir /s .git
+.git, Are you sure (Y/N)? y
+The system cannot find the file specified.
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>git init
+Initialized empty Git repository in C:/Users/Mtc/Desktop/shengze-group-solar-22o/.git/
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>git branch -M main
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>git remote add origin https://github.com/haa-coder/Shengze-Group-Solar-22o.git
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>git add .
+warning: adding embedded git repository: Shengze-Group-Solar-22o
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint:
+hint:   git submodule add <url> Shengze-Group-Solar-22o
+hint:
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint:
+hint:   git rm --cached Shengze-Group-Solar-22o
+hint:
+hint: See "git help submodule" for more information.
+hint: Disable this message with "git config set advice.addEmbeddedRepo false"
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>rmdir /s .git
+.git, Are you sure (Y/N)? y
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>git init
+Initialized empty Git repository in C:/Users/Mtc/Desktop/shengze-group-solar-22o/.git/
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>git branch -M main
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>git remote add origin https://github.com/haa-coder/Shengze-Group-Solar-22o.git
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>git add .
+warning: adding embedded git repository: Shengze-Group-Solar-22o
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint:
+hint:   git submodule add <url> Shengze-Group-Solar-22o
+hint:
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint:
+hint:   git rm --cached Shengze-Group-Solar-22o
+hint:
+hint: See "git help submodule" for more information.
+hint: Disable this message with "git config set advice.addEmbeddedRepo false"
+
+C:\Users\Mtc\Desktop\shengze-group-solar-22o>

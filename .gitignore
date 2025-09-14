@@ -1,0 +1,11 @@
+# Ignore Replit and system junk 
+.local/ 
+.replit 
+node_modules/ 
+dist/ 
+build/ 
+*.log 
+.DS_Store 
+Thumbs.db 
+.vscode/ 
+*.swp 
