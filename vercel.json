@@ -16,21 +16,14 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/server/index.ts"
+      "source": "/api/(.*)",
+      "destination": "/server/index.ts"
     },
     {
-      "src": "/download-all-specs",
-      "dest": "/Technical_Specifications_Complete.zip"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/download-all-specs",
+      "destination": "/Technical_Specifications_Complete.zip"
     }
   ],
   "headers": [
