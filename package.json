@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development tsx server/index.ts",
-    "build": "vite build && tsc --project tsconfig.server.json && mkdir -p dist/attached_assets && cp -r attached_assets/* dist/attached_assets/ 2>/dev/null || true",
+    "build": "vite build && tsc --project tsconfig.server.json && mkdir -p dist/public/attached_assets && cp -r attached_assets/* dist/public/attached_assets/ && node scripts/build-zip.js",
     "start": "NODE_ENV=production node dist/server/index.js",
     "check": "tsc",
     "db:push": "drizzle-kit push"

@@ -180,7 +180,7 @@ export default function Products() {
                     data-testid="button-download-all-specs"
                     onClick={() => {
                       // Create a direct link to download the ZIP file
-                      window.open('/download-all-specs', '_blank');
+                      window.open('/Technical_Specifications_Complete.zip', '_blank');
                     }}
                   >
                     <Download className="h-5 w-5 mr-2" />

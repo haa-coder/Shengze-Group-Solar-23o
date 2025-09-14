@@ -950,7 +950,7 @@ function ProductDetailModal({ panel }: { panel: SolarPanel }) {
               onClick={() => {
                 if (panel.datasheet) {
                   const link = document.createElement('a');
-                  link.href = `/download/${panel.datasheet}`;
+                  link.href = `/attached_assets/${panel.datasheet}`;
                   link.download = panel.datasheet;
                   link.click();
                 }
